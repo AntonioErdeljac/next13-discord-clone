@@ -1,6 +1,6 @@
 import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
-import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
+import { Hash, Mic, ShieldAlert, ShieldCheck, Video,File } from "lucide-react";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
@@ -19,6 +19,7 @@ interface ServerSidebarProps {
 
 const iconMap = {
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
+  [ChannelType.NOTE]: <File className="mr-2 h-4 w-4" />,
   [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
   [ChannelType.VIDEO]: <Video className="mr-2 h-4 w-4" />
 };
@@ -60,6 +61,7 @@ export const ServerSidebar = async ({
   });
 
   const textChannels = server?.channels.filter((channel) => channel.type === ChannelType.TEXT)
+  const NoteChannels = server?.channels.filter((channel) => channel.type === ChannelType.NOTE)
   const audioChannels = server?.channels.filter((channel) => channel.type === ChannelType.AUDIO)
   const videoChannels = server?.channels.filter((channel) => channel.type === ChannelType.VIDEO)
   const members = server?.members.filter((member) => member.profileId !== profile.id)
@@ -84,6 +86,15 @@ export const ServerSidebar = async ({
                 label: "Text Channels",
                 type: "channel",
                 data: textChannels?.map((channel) => ({
+                  id: channel.id,
+                  name: channel.name,
+                  icon: iconMap[channel.type],
+                }))
+              },
+              {
+                label: "Notes",
+                type: "channel",
+                data: NoteChannels?.map((channel) => ({
                   id: channel.id,
                   name: channel.name,
                   icon: iconMap[channel.type],
@@ -130,6 +141,26 @@ export const ServerSidebar = async ({
             />
             <div className="space-y-[2px]">
               {textChannels.map((channel) => (
+                <ServerChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  server={server}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+          {!!NoteChannels?.length && (
+          <div className="mb-2">
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.NOTE}
+              role={role}
+              label="Notes"
+            />
+            <div className="space-y-[2px]">
+              {NoteChannels.map((channel) => (
                 <ServerChannel
                   key={channel.id}
                   channel={channel}

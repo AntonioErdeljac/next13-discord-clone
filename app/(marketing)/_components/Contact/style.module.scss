@@ -1,0 +1,130 @@
+.contact{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #141516;
+    position: relative;
+    .body{
+        padding-top: 200px;
+        width: 100%;
+        max-width: 1800px;
+        background-color: #141516;
+
+        .title{
+            border-bottom: 1px solid rgb(134, 134, 134);
+            padding-bottom: 100px;
+            margin-left: 200px;
+            margin-right: 200px;
+            position: relative;
+            span{
+                display: flex;
+                align-items: center;
+                .imageContainer{
+                    width: 100px;
+                    height: 100px;
+                    position: relative;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    img{
+                        object-fit: cover;
+                    }
+                }
+                h2{
+                    margin-left: 0.3em;
+                }
+            }
+            h2{
+                font-size: 5vw;
+                margin: 0px;
+                font-weight: 300;
+            }
+            .buttonContainer{
+                position: absolute;
+                left: calc(100% - 400px); 
+                top: calc(100% - 75px);
+            }
+            .button{
+                width: 180px;
+                height: 180px;
+                background-color: #455CE9;
+                color: white;
+                border-radius: 50%;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                p{
+                    margin: 0px;
+                    font-size: 16px;
+                    font-weight: 300;
+                    z-index: 2;
+                    position: relative;
+                }
+            }
+            svg{
+                position: absolute;
+                top: 30%;
+                left: 100%;
+            }
+        }
+        .nav{
+            display: flex;
+            gap: 20px;
+            margin-top: 100px;
+            margin-left: 200px;
+            margin-right: 200px;
+        }
+        .info{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 200px;
+            padding: 20px;
+            div{
+                display: flex;
+                gap: 10px;
+                align-items: flex-end;
+                p, h3{
+                    margin: 0px;
+                    padding: 2.5px;
+                    cursor: pointer;
+                }
+                p{
+                    &::after{
+                        content: "";
+                        width: 0%;
+                        height: 1px;
+                        background-color: white;
+                        display: block;
+                        margin-top: 2px;
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        transition: width 0.2s linear;
+                    }
+                    &:hover{
+                        &::after{
+                            width: 100%;
+                        }
+                    }
+                }
+                span{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                }
+                h3{
+                    color: grey;
+                    cursor: default;
+                    font-weight: 300;
+                    font-size: 1em;
+                }
+            }
+            
+        }
+    }
+    
+}
