@@ -25,7 +25,7 @@ const projects = [
   },
   {
     title: "Greer-app",
-    src: "Greer-app.png",
+    src: "funny.jpg",
     color: "#706D63"
   }
 ]
